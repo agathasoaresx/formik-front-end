@@ -1,0 +1,31 @@
+.card-user{
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    width: 300px;
+    border-radius: 15px;
+    gap: 10px;
+    padding: 10px;
+    margin: 0 0 10px 0;
+}
+
+.card-user img{
+    border-radius: 50%;
+}
+
+.card-user div h4{
+    margin: 0;
+}
+.card-user div p{
+    margin: 0;
+}
+.card-user div p span{
+    display: inline-block;
+    margin: 15px 10px 0 0;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.card-user div p span.delete{
+    color: red;
+}

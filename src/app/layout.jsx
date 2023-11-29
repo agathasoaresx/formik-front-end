@@ -1,14 +1,18 @@
-export const metadata = {
-  title: 'System',
-  description: 'Null',
-}
+import '@/app/globals.css'
+import Banner from '@/components/layout/Banner'
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <body>
+export const metadata = {
+    title: 'System',
+    description: 'Sla',
+  }
+  
+  export default function RootLayout({ children }) {
+    return (
+      <html lang="en">
+        <body className="flex">
+          <Banner />
           {children}
       </body>
-    </html>
-  )
-}
+      </html>
+    )
+  }
