@@ -4,9 +4,9 @@ import ListMembers from "@/components/utils/ListMembers"
 const Membros = async () => {
   return (
     <>
-        <Header />
+      <div className="flex flex-col mx-10">
         <ListMembers />
-        
+      </div>
     </>
   )
 }

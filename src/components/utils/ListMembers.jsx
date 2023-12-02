@@ -3,6 +3,14 @@
 import { useState, useEffect } from "react"
 import CardUser from "@/components/cards/CardUser"
 import Modal from "@/components/utils/Modal"
+import { League_Spartan } from 'next/font/google'
+
+const league_Spartan = League_Spartan(
+    {
+      weight: '700',
+      subsets: ['latin'],
+    }
+  )
 
 const ListMembers = () => {
 
@@ -11,7 +19,7 @@ const ListMembers = () => {
 
     useEffect(() => {
         const getMembers = async () => {
-            const response = await fetch('http://localhost:3300/user/list', { cache: 'no-store' })
+            const response = await fetch('http://localhost:3300/paciente/list', { cache: 'no-store' })
             const data = await response.json()
             setUsers(data)
         }
@@ -49,15 +57,16 @@ const ListMembers = () => {
 
     return (
         <>
-            <h1>Membros</h1>
-            <button onClick={() => setModalSignInIsOpen(true)}>Cadastrar</button>
+
+            <h1 className={`font-sans text-3xl py-5 league_Spartan ${league_Spartan.className}`}>Pacientes</h1>
             {
                 users.map((user) => { //map - usado para percorrer array. Não dá pra usar map em objeto.
                     return (
-                        <CardUser key={user.id} user={user} users={users} setUsers={setUsers} /> //forma do react identificar os cards. Diferenciar um card do outro
+                        <CardUser key={user.id} paciente={user} pacientes={users} setPacientes={setUsers} /> //forma do react identificar os cards. Diferenciar um card do outro
                     )
                 })
             }
+            <button className="bg-[#051cdfe] rounded-md"><a href="/">Voltar</a></button>
             <Modal isOpen={modalSignInIsOpen} changeOpen={setModalSignInIsOpen}>
                 <h1>Cadastros</h1>
                 <form onSubmit={handleSubmit}>
