@@ -23,12 +23,21 @@ const inter = Inter(
   }
 )
 
+const currentDate = new Date().toLocaleDateString();
+const dateFormated = currentDate.split('/').reverse().join('-');
+
+const getFormatedDate = (currentDate) => {
+  return currentDate.split('/').reverse().join('-');
+}
+
+
 const schema = Yup.object().shape({
   name: Yup.string().required(),
-  email: Yup.string().required("E-mail é obrigatório"),
-  date: Yup.date().required("Campo obrigatório"),
-  phone: Yup.string().required("Insira um telefone").min(8, "Telefone precisa ter no mínimo 8 números"),
-  cpf: Yup.string().required("Cpf é obrigatório").min(11, "CPF precisa ter no mínimo 11 números")
+  email: Yup.string().required("Campo obrigatório"),
+  date: Yup.date().max(getFormatedDate(new Date().toLocaleDateString())).required("Campo obrigatório"),
+  phone: Yup.string().required("Insira um telefone").min(11, "Insira um número de telefone válido").max(11, "Insira um número de telefone válido"),
+  cpf: Yup.string().required("Cpf é obrigatório").min(11, "Insira um cpf válido").max(11, "Insira um cpf válido"),
+  sexo: Yup.string().required("Selecione uma opção")
 });
 
 
@@ -81,7 +90,7 @@ const Cadastro = () => {
           <div id="cadastro-body" class="w-auto">
             <Formik
               validationSchema={schema}
-              initialValues={{ name: '', email: '', date: '', phone: '', cpf: '' }}
+              initialValues={{ name: '', email: '', date: '', phone: '', cpf: '', sexo: '' }}
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
                   alert(JSON.stringify(values, null, 2));
@@ -100,16 +109,12 @@ const Cadastro = () => {
                   <ErrorMessage component="span" name="phone" />
                   <Field type="cpf" name="cpf" placeholder="CPF" class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
                   <ErrorMessage component="span" name="cpf" />
-                  {/* <Field type="sex" name="sexo" placeholder="sexo" class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" /> */}
-                  <div>
-                    <label>
-                      Feminino
-                      <Field type="radio" name="sexo" value="Feminino" class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
-                    </label>
-                    <label>
-                      Masculino
-                      <Field type="radio" name="sexo" value="Masculino" class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
-                    </label>
+                  
+                  <div className='w-auto h-[80px] flex flex-row mt-[15px]'>
+                    <label className='mt-[10px] text-neutral-600 px-2 font-sans text-base'>Feminino</label>
+                      <Field type="radio" name="sexo" value="Feminino" class=" mr-[20px] border-2  h-[48px] border-gray-900 border-opacity-10" />
+                    <label className='mt-[10px] text-neutral-600 px-2 font-sans text-base'>Masculino </label>
+                      <Field type="radio" name="sexo" value="Masculino" class="border-2 h-[48px] rounded border-gray-900 border-opacity-10" />
                     <ErrorMessage component="span" name="sexo" />
                   </div>
 
