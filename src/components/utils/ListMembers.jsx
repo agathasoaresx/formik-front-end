@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import CardUser from "@/components/cards/CardUser"
 import Modal from "@/components/utils/Modal"
 import { League_Spartan } from 'next/font/google'
+import './ListMembers.css'
 
 const league_Spartan = League_Spartan(
     {
@@ -58,7 +59,9 @@ const ListMembers = () => {
     return (
         <>
 
-            <h1 className={`font-sans text-3xl py-5 league_Spartan ${league_Spartan.className}`}>Pacientes</h1>
+            <h1 className={`font-sans text-3xl pt-5 league_Spartan ${league_Spartan.className}`}>Pacientes</h1>
+            <button className="w-[50px] bg-cyan-700 rounded-md mb-5 text-white"><a href="/">Voltar</a></button>
+            <div class="teste">
             {
                 users.map((user) => { //map - usado para percorrer array. Não dá pra usar map em objeto.
                     return (
@@ -66,7 +69,7 @@ const ListMembers = () => {
                     )
                 })
             }
-            <button className="bg-[#051cdfe] rounded-md"><a href="/">Voltar</a></button>
+            </div>
             <Modal isOpen={modalSignInIsOpen} changeOpen={setModalSignInIsOpen}>
                 <h1>Cadastros</h1>
                 <form onSubmit={handleSubmit}>
