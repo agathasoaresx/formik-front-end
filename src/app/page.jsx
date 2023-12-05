@@ -23,9 +23,9 @@ const inter = Inter(
 )
 
 
-
-const schema = Yup.object().shape({
-  name: Yup.string().required(),
+// definição do schema sem precisar criar função de validação 
+const schema = Yup.object().shape({ //define como objeto
+  name: Yup.string().required("Nome é obrigatório"),
   email: Yup.string().required("Campo obrigatório").email("Email inválido"),
   date: Yup.date().required("Campo obrigatório"),
   phone: Yup.string().required("Insira um telefone").min(11, "Insira um número de telefone válido").max(11, "Insira um número de telefone válido"),
@@ -39,6 +39,7 @@ const Cadastro = () => {
 
   const [pacientes, setPacientes] = useState([])
 
+  //
   const handleSubmit = async (event) => {
     event.preventDefault()
     const newPaciente = {
@@ -83,8 +84,9 @@ const Cadastro = () => {
             </div>
           </div>
           <div id="cadastro-body" class="w-auto">
-            <Formik
-              validationSchema={schema}
+
+            <Formik //componente que lida com os estados e cria o provider 
+              validationSchema={schema} 
               initialValues={{ name: '', email: '', date: '', phone: '', cpf: '', sexo: '' }}
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
@@ -93,25 +95,43 @@ const Cadastro = () => {
                 }, 400);
               }}
             >
-              <Form onSubmit={handleSubmit}>
+              <Form //componente que se conecta com a API do formik e lida com o submit 
+              onSubmit={handleSubmit}> 
+
                 <div className='space-y-3'>
-                  <Field type="name" name="nome" placeholder="Nome *" class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10 " />
-                  <Field type="email" name="email" placeholder="E-mail *" class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
-                  <ErrorMessage name="email" component="div" />
-                  <Field className=" border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" name="data_nasc" placeholder="date" type="date" />
+
+                  <Field //componente que substitui o input - não é necessário passar os values e OnChange
+                  type="name" name="nome" placeholder="Nome *" 
+                  className="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10 " />
+                  <ErrorMessage component="span" name="name" />
+
+                  <Field type="email" name="email" placeholder="E-mail *"
+                  className="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
+                  <ErrorMessage // componente que renderiza a mensagem de erro de um determinado campo se esse campo tiver sido visitado
+                  name="email" component="div" />
+                  
+                  <Field name="data_nasc" placeholder="date" type="date"
+                  className=" border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10"  />
                   <ErrorMessage component="span" name="date" />
-                  <Field type="phone" name="phone" placeholder="Telefone *" class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
+                  
+                  <Field type="phone" name="phone" placeholder="Telefone *"
+                  className="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
                   <ErrorMessage component="span" name="phone" />
-                  <Field type="cpf" name="cpf" placeholder="CPF *" class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
+                  
+                  <Field type="cpf" name="cpf" placeholder="CPF *"
+                  className="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
                   <ErrorMessage component="span" name="cpf" />
                   
                   <div className='w-auto h-[80px] flex flex-row mt-[15px]'>
                     
                    <label className='mt-[10px] text-neutral-600 px-2 font-sans text-base'>Feminino</label>
-                      <Field type="radio" name="sexo" value="Feminino" class=" mr-[20px] border-2  h-[48px] border-gray-900 border-opacity-10" />
+                      <Field type="radio" name="sexo" value="Feminino"
+                      className=" mr-[20px] border-2  h-[48px] border-gray-900 border-opacity-10" />
                     <label className='mt-[10px] text-neutral-600 px-2 font-sans text-base'>Masculino </label>
-                      <Field type="radio" name="sexo" value="Masculino" class="border-2 h-[48px] rounded border-gray-900 border-opacity-10 " />
+                      <Field type="radio" name="sexo" value="Masculino"
+                      className="border-2 h-[48px] rounded border-gray-900 border-opacity-10 " />
                     <ErrorMessage component="span" name="sexo"/>
+
                   </div>
 
 
