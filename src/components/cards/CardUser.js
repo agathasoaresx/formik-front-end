@@ -26,12 +26,6 @@ const CardUser = ({ paciente, pacientes, setPacientes }) => {
 
   const [showCard, setShowCard] = useState(true)
   const [modalEditIsOpen, setModalEditIsOpen] = useState(false)
-  // const [nome, setNome] = useState(paciente.nome)
-  const [email, setEmail] = useState(paciente.email)
-  const [dataNasc, setDataNasc] = useState(paciente.data_nasc)
-  const [telefone, setTelefone] = useState(paciente.telefone)
-  // const [sexo, setSexo] = useState(paciente.sexo)
-  const [cpf, setCpf] = useState(paciente.cpf)
 
   const handleDelete = async (idPaciente) => {
     const objPaciente = {
