@@ -129,29 +129,29 @@ const CardUser = ({ paciente, pacientes, setPacientes }) => {
             <Form onSubmit={handleSubmit}>
               <div className='space-y-3'>
                 <input type="hidden" name="id" value={paciente.id} />
-                <Field name="nome" placeholder="Nome" onChange={props.handleChange} class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10 " />
-                <Field type="email" name="email" placeholder="E-mail" onChange={props.handleChange} class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
+                <Field name="nome" placeholder="Nome" onChange={props.handleChange} class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10 " />
+                <Field type="email" name="email" placeholder="E-mail" onChange={props.handleChange} class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
                 <ErrorMessage name="email" component="div" />
-                <Field type="date" name="data_nasc" placeholder="date" onChange={props.handleChange} className=" border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10"/>
+                <Field type="date" name="data_nasc" placeholder="date" onChange={props.handleChange} className=" border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
                 <ErrorMessage component="span" name="date" />
-                <Field name="phone" placeholder="Telefone" onChange={props.handleChange} class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
+                <Field name="phone" placeholder="Telefone" onChange={props.handleChange} class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
                 <ErrorMessage component="span" name="phone" />
-                <Field type="cpf" name="cpf" placeholder="CPF" onChange={props.handleChange} class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
+                <Field type="cpf" name="cpf" placeholder="CPF" onChange={props.handleChange} class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
                 <ErrorMessage component="span" name="cpf" />
                 {/* <Field type="sex" name="sexo" placeholder="sexo" class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" /> */}
                 <div>
                   <label>
                     Feminino
-                    <Field type="radio" name="sexo" value="Feminino" className="text-base text-[#A2A3A4] mx-2 border-gray-900 border-opacity-10"/>
+                    <Field type="radio" name="sexo" value="Feminino" className="text-base text-[#A2A3A4] mx-2 border-gray-900 border-opacity-10" />
                   </label>
                   <label>
                     Masculino
-                    <Field type="radio" name="sexo" value="Masculino" className="text-base text-[#A2A3A4] mx-2 border-gray-900 border-opacity-10"/>
+                    <Field type="radio" name="sexo" value="Masculino" className="text-base text-[#A2A3A4] mx-2 border-gray-900 border-opacity-10" />
                   </label>
                   <ErrorMessage component="span" name="sexo" />
                 </div>
                 <div id="input" class="pt-9 flex justify-center">
-                  <input type="submit" value="Salvar" className="rounded-md w-[496px] h-[45px] bg-lightGray font-sans text-[#979797]"/>
+                  <input type="submit" value="Salvar" className=" bg-sky-500 hover:bg-sky-700 cursor-pointer rounded-md w-[496px] h-[45px] font-sans font-bold text-zinc-50 " />
                 </div>
               </div>
             </Form>
