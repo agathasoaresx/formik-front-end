@@ -1,0 +1,12 @@
+.teste{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 550px){
+    .teste{
+        display: block;
+    }
+    
+}
