@@ -8,7 +8,6 @@ import { useState } from 'react'
 
 
 
-
 const league_Spartan = League_Spartan(
   {
     weight: '700',
@@ -23,21 +22,15 @@ const inter = Inter(
   }
 )
 
-const currentDate = new Date().toLocaleDateString();
-const dateFormated = currentDate.split('/').reverse().join('-');
-
-const getFormatedDate = (currentDate) => {
-  return currentDate.split('/').reverse().join('-');
-}
 
 
 const schema = Yup.object().shape({
   name: Yup.string().required(),
-  email: Yup.string().required("Campo obrigatório"),
-  date: Yup.date().max(getFormatedDate(new Date().toLocaleDateString())).required("Campo obrigatório"),
+  email: Yup.string().required("Campo obrigatório").email("Email inválido"),
+  date: Yup.date().required("Campo obrigatório"),
   phone: Yup.string().required("Insira um telefone").min(11, "Insira um número de telefone válido").max(11, "Insira um número de telefone válido"),
   cpf: Yup.string().required("Cpf é obrigatório").min(11, "Insira um cpf válido").max(11, "Insira um cpf válido"),
-  sexo: Yup.string().required("Selecione uma opção")
+ 
 });
 
 
@@ -55,8 +48,9 @@ const Cadastro = () => {
       telefone: event.target.phone.value,
       sexo: event.target.sexo.value,
       cpf: event.target.cpf.value
-
     }
+
+
     const response = await fetch(
       'http://localhost:3300/paciente',
       {
@@ -73,6 +67,7 @@ const Cadastro = () => {
       console.log(result)
       if (result?.sucess) {
         setPacientes([...pacientes, result.paciente])
+        alert("Paciente cadastrado com sucesso!")
       }
     }
   }
@@ -100,33 +95,41 @@ const Cadastro = () => {
             >
               <Form onSubmit={handleSubmit}>
                 <div className='space-y-3'>
-                  <Field type="name" name="nome" placeholder="Nome" class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10 " />
-                  <Field type="email" name="email" placeholder="E-mail" class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
+                  <Field type="name" name="nome" placeholder="Nome *" class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10 " />
+                  <Field type="email" name="email" placeholder="E-mail *" class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
                   <ErrorMessage name="email" component="div" />
-                  <Field className=" border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" name="data_nasc" placeholder="date" type="date" />
+                  <Field className=" border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" name="data_nasc" placeholder="date" type="date" />
                   <ErrorMessage component="span" name="date" />
-                  <Field type="phone" name="phone" placeholder="Telefone" class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
+                  <Field type="phone" name="phone" placeholder="Telefone *" class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
                   <ErrorMessage component="span" name="phone" />
-                  <Field type="cpf" name="cpf" placeholder="CPF" class="border-2 text-[#A2A3A4] px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
+                  <Field type="cpf" name="cpf" placeholder="CPF *" class="border-2 px-2 font-sans text-base h-[48px] rounded w-[100%] border-gray-900 border-opacity-10" />
                   <ErrorMessage component="span" name="cpf" />
                   
                   <div className='w-auto h-[80px] flex flex-row mt-[15px]'>
-                    <label className='mt-[10px] text-neutral-600 px-2 font-sans text-base'>Feminino</label>
+                    
+                   <label className='mt-[10px] text-neutral-600 px-2 font-sans text-base'>Feminino</label>
                       <Field type="radio" name="sexo" value="Feminino" class=" mr-[20px] border-2  h-[48px] border-gray-900 border-opacity-10" />
                     <label className='mt-[10px] text-neutral-600 px-2 font-sans text-base'>Masculino </label>
-                      <Field type="radio" name="sexo" value="Masculino" class="border-2 h-[48px] rounded border-gray-900 border-opacity-10" />
-                    <ErrorMessage component="span" name="sexo" />
+                      <Field type="radio" name="sexo" value="Masculino" class="border-2 h-[48px] rounded border-gray-900 border-opacity-10 " />
+                    <ErrorMessage component="span" name="sexo"/>
                   </div>
 
 
+                  <div class="mt-[0px]">
+                       <input type="submit" value="Salvar" className=" bg-sky-500 hover:bg-sky-700 cursor-pointer rounded-md w-[496px] h-[45px] font-sans font-bold text-zinc-50 " />
 
-
-                  <div id="input" class="pt-9">
-                    <input type="submit" value="Salvar" className="rounded-md w-[496px] h-[45px] bg-lightGray font-sans text-[#979797] " />
-                  </div>
-                </div>
+                     
+                 </div>
+              </div>
               </Form>
+            
             </Formik>
+            
+            <div className='mt-[80px] ml-[250px]'>
+                <a href='/pacientes'>
+                          <button className="bg-indigo-500 hover:bg-indigo-700 cursor-pointer rounded-md w-[240px] h-[45px] font-sans font-bold text-zinc-50">Pacientes cadastrados</button>
+                </a>
+            </div>
           </div>
         </div>
       </div>
